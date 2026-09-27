@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WeatherNow | Weather App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background">
+        <div class="cloud cloud-one"></div>
+        <div class="cloud cloud-two"></div>
+        <div class="cloud cloud-three"></div>
+    </div>
+    
+    <!-- Weather Popup -->
+<div id="weatherPopup" class="weather-popup hidden">
+
+    <div class="popup-box">
+
+        <button id="closePopup" class="close-popup" type="button">
+            ×
+        </button>
+
+        <p class="popup-label">CURRENT WEATHER</p>
+
+        <div id="popupIcon" class="popup-icon">
+            ☀️
+        </div>
+
+        <h2 id="popupWeather">
+            Clear Sky
+        </h2>
+
+        <p id="popupLocation">
+            New Delhi, India
+        </p>
+
+        <div class="popup-temperature">
+            <span id="popupTemperature">--</span>°C
+        </div>
+
+        <p class="popup-feels">
+            Feels like <span id="popupFeelsLike">--</span>°C
+        </p>
+
+        <button id="viewWeatherBtn" class="view-weather-btn" type="button">
+            View Full Weather
+        </button>
+
+    </div>
+
+</div>
+
+    <main class="app-container">
+
+        <section class="weather-card">
+
+            <!-- Header -->
+            <header class="app-header">
+                <div>
+                    <p class="app-tag">WEATHER DASHBOARD</p>
+                    <h1>WeatherNow</h1>
+                </div>
+
+                <button id="locationBtn" class="location-btn" type="button">
+                    📍 My Location
+                </button>
+            </header>
+
+
+            <!-- Search -->
+            <div class="search-section">
+
+                <div class="search-box">
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="cityInput"
+                        placeholder="Search city..."
+                        autocomplete="off"
+                    >
+
+                    <button id="searchBtn" type="button">
+                        Search
+                    </button>
+                </div>
+
+                <p id="errorMessage" class="error-message"></p>
+
+            </div>
+
+
+            <!-- Loading -->
+            <div id="loading" class="loading hidden">
+                <div class="loader"></div>
+                <p>Fetching weather...</p>
+            </div>
+
+
+            <!-- Weather Content -->
+            <div id="weatherContent" class="weather-content hidden">
+
+                <!-- Current Weather -->
+                <div class="current-weather">
+
+                    <div class="location-info">
+                        <p class="country" id="countryName">India</p>
+
+                        <h2 id="cityName">
+                            New Delhi
+                        </h2>
+
+                        <p id="currentDate">
+                            Today
+                        </p>
+                    </div>
+
+
+                    <div class="weather-main">
+
+                        <div class="weather-icon" id="weatherIcon">
+                            ☀️
+                        </div>
+
+                        <div class="temperature">
+                            <span id="temperature">--</span>
+                            <sup>°C</sup>
+                        </div>
+
+                        <p id="weatherDescription">
+                            Clear Sky
+                        </p>
+
+                        <p class="feels-like">
+                            Feels like <span id="feelsLike">--</span>°C
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Weather Details -->
+                <div class="details-grid">
+
+                    <div class="detail-card">
+                        <div class="detail-icon">💧</div>
+
+                        <div>
+                            <span>Humidity</span>
+                            <strong id="humidity">--%</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="detail-card">
+                        <div class="detail-icon">💨</div>
+
+                        <div>
+                            <span>Wind Speed</span>
+                            <strong id="windSpeed">-- km/h</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="detail-card">
+                        <div class="detail-icon">🌧️</div>
+
+                        <div>
+                            <span>Precipitation</span>
+                            <strong id="precipitation">-- mm</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="detail-card">
+                        <div class="detail-icon">🌡️</div>
+
+                        <div>
+                            <span>Feels Like</span>
+                            <strong id="feelsLikeDetail">--°C</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Sunrise / Sunset -->
+                <div class="sun-section">
+
+                    <div class="sun-card">
+                        <span class="sun-icon">🌅</span>
+
+                        <div>
+                            <span>Sunrise</span>
+                            <strong id="sunrise">--:--</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="sun-card">
+                        <span class="sun-icon">🌇</span>
+
+                        <div>
+                            <span>Sunset</span>
+                            <strong id="sunset">--:--</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Forecast -->
+                <section class="forecast-section">
+
+                    <div class="section-heading">
+                        <h3>7-Day Forecast</h3>
+                        <span>Upcoming weather</span>
+                    </div>
+
+                    <div id="forecastContainer" class="forecast-container">
+                        <!-- Forecast cards generated by JavaScript -->
+                    </div>
+
+                </section>
+
+
+                <!-- Footer -->
+                <div class="weather-footer">
+                    <span id="lastUpdated">
+                        Last updated: --
+                    </span>
+
+                    <button id="refreshBtn" type="button">
+                        🔄 Refresh
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
